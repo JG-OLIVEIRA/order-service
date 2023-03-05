@@ -1,0 +1,55 @@
+openapi: 3.0.3
+info:
+  title: Order Service
+  version: 1.0.0
+servers:
+- url: http://localhost:8081
+paths:
+  /api/order:
+    post:
+      operationId: placeOrder
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderRequest'
+        required: true
+      responses:
+        "201":
+          content:
+            '*/*':
+              schema:
+                example: "Order placed Successfully"
+                type: string
+          description: Created
+      summary: POST api/order
+      x-contentType: application/json
+      x-accepts: '*/*'
+components:
+  schemas:
+    OrderLineItemsDto:
+      example:
+        skuCode: "galaxy_S21FE"
+        price: 2700
+        quantity: 2
+      properties:
+        skuCode:
+          type: string
+        price:
+          type: number
+        quantity:
+          type: number
+      type: object
+    OrderRequest:
+      example:
+        orderLineItemsDtoList:
+          skuCode: "galaxy_S21FE"
+          price:  2700
+          quantity: 2
+      properties:
+        orderLineItemsDtoList:
+          items:
+            $ref: '#/components/schemas/OrderLineItemsDto'
+          type: array
+      type: object
+
