@@ -1,0 +1,14 @@
+services:
+  mysql:
+    image: mysql:9.7.0
+    container_name: order-service-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: mysql
+      MYSQL_DATABASE: order_service
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+volumes:
+  mysql_data:
