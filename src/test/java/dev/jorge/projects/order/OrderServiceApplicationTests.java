@@ -16,6 +16,7 @@ class OrderServiceApplicationTests {
 
 	@ServiceConnection
 	static MySQLContainer mySQLContainer = new MySQLContainer("mysql:9.7.0");
+
 	@LocalServerPort
 	private Integer port;
 
