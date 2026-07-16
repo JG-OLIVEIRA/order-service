@@ -1,6 +1,5 @@
 package dev.jorge.projects.order.controller;
 
-
 import dev.jorge.projects.order.dto.OrderRequest;
 import dev.jorge.projects.order.service.OrderService;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +19,5 @@ public class OrderController {
         orderService.placeOrder(orderRequest);
         return "Order Placed Successfully";
     }
-
 
 }

@@ -34,10 +34,15 @@ public class OrderService {
             order.setQuantity(orderRequest.quantity());
             orderRepository.save(order);
 
-            OrderPlacedEvent orderPlacedEvent = new OrderPlacedEvent(order.getOrderNumber(), orderRequest.userDetails().email());
-            log.info("Start - Sending OrderPlacedEvent {} to Kafka topic order-placed", orderPlacedEvent);
+            OrderPlacedEvent orderPlacedEvent = new OrderPlacedEvent();
+            orderPlacedEvent.setOrderNumber(order.getOrderNumber());
+            orderPlacedEvent.setEmail(orderRequest.userDetails().email());
+            orderPlacedEvent.setFirstName(orderRequest.userDetails().firstName());
+            orderPlacedEvent.setLastName(orderRequest.userDetails().lastName());
+
+            log.info("Start - Sending OrderPlacedEvent {} to Kafka topic OrderPlacedEvent.avsc", orderPlacedEvent);
             kafkaTemplate.send("order-placed", orderPlacedEvent);
-            log.info("End - Sending OrderPlacedEvent {} to Kafka topic order-placed", orderPlacedEvent);
+            log.info("End - Sending OrderPlacedEvent {} to Kafka topic OrderPlacedEvent.avsc", orderPlacedEvent);
         } else {
             throw new RuntimeException("Product with skuCode " + orderRequest.skuCode() + " is not in stock");
         }

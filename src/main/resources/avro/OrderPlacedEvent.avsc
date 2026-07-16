@@ -1,0 +1,11 @@
+{
+  "namespace": "dev.jorge.projects.order.event",
+  "type": "record",
+  "name": "OrderPlacedEvent",
+  "fields": [
+    { "name": "orderNumber", "type": "string" },
+    { "name": "email", "type": "string" },
+    { "name": "firstName", "type": "string" },
+    { "name": "lastName", "type": "string" }
+  ]
+}
